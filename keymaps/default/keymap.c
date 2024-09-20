@@ -47,9 +47,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT(
   KC_F1,    KC_F2,  KC_F3,   KC_F4,   KC_F5,   KC_F6,                    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_EQUAL,
-MO(_RAISE),KC_NO,  KC_UP,   KC_QUOT,   KC_NO,   KC_NO,                    KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_MINS, KC_BSLS,
+MO(_RAISE),KC_NO,  KC_UP,   KC_QUOT,   KC_NO,   KC_NO,                    AC_ON,   AC_OFF,   KC_NO,   KC_NO,   KC_MINS, KC_BSLS,
   KC_NO,    KC_LEFT,KC_DOWN, KC_RGHT, KC_LBRC,   KC_NO,                    KC_NO,   KC_NO,   KC_RBRC,   KC_NO,   KC_NO, KC_NO,
-  KC_NO,    KC_NO,   KC_NO,  KC_NO,   KC_NO,   KC_NO, KC_NO,      KC_NO, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,
+  KC_NO,    KC_NO,   KC_NO,  KC_NO,   KC_NO,   KC_NO, KC_NO,      AC_TOGG, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,  KC_NO,
                               KC_NO, KC_NO, KC_NO, KC_NO,           KC_NO, KC_NO, KC_NO, KC_RALT
 ),      
 /* RAISE
@@ -69,7 +69,7 @@ MO(_RAISE),KC_NO,  KC_UP,   KC_QUOT,   KC_NO,   KC_NO,                    KC_NO,
 
 [_RAISE] = LAYOUT(
   KC_NO,    KC_NO,    KC_NO,   KC_NO, KC_NO, KC_NO,                                         RGB_SAD, RGB_VAI, RGB_VAD, RGB_SPI, RGB_SPD, KC_NO,
-  KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_NO,  KC_NO,                        KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,
+  QK_LEAD,    KC_NO,    KC_NO,    KC_NO,   KC_NO,  KC_NO,                        KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,
   RGB_TOG,  KC_NO,    KC_NO,    KC_NO,   KC_NO,  RGB_SAI,      RGB_SAD, RGB_VAI, RGB_VAD, RGB_SPI,   RGB_SPD, KC_NO,
   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,  KC_NO,   KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO,
                              KC_NO, KC_NO, KC_NO,  KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO
@@ -111,11 +111,11 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 }
 
 // When you add source files to SRC in rules.mk, you can use functions.
-const char *read_layer_state(void);
-const char *read_logo(void);
-void set_keylog(uint16_t keycode, keyrecord_t *record);
-const char *read_keylog(void);
-const char *read_keylogs(void);
+// const char *read_layer_state(void);
+// const char *read_logo(void);
+// void set_keylog(uint16_t keycode, keyrecord_t *record);
+// const char *read_keylog(void);
+// const char *read_keylogs(void);
 
 // const char *read_mode_icon(bool swap);
 // const char *read_host_led_state(void);
@@ -126,9 +126,9 @@ bool oled_task_user(void) {
 
   if (is_keyboard_master()) {
     // If you want to change the display of OLED, you need to change here
-    oled_write_ln(read_layer_state(), false);
-    oled_write_ln(read_keylog(), false);
-    oled_write_ln(read_keylogs(), false);
+    // oled_write_ln(read_layer_state(), false);
+    // oled_write_ln(read_keylog(), false);
+    // oled_write_ln(read_keylogs(), false);
     //oled_write_ln(read_mode_icon(keymap_config.swap_lalt_lgui), false);
     //oled_write_ln(read_host_led_state(), false);
     //oled_write_ln(read_timelog(), false);
@@ -147,4 +147,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // set_timelog();
   }
   return true;
+}
+
+void leader_start_user(void) {
+  oled_write_P(PSTR("GAAAA?"), false);
+}
+
+
+void leader_end_user(void) {
+    if (leader_sequence_one_key(KC_F)) {
+        oled_write_P(PSTR("QMK is awesome."), false);
+        // Leader, f => Types the below string
+        // SEND_STRING("QMK is awesome.");
+    } else if (leader_sequence_two_keys(KC_D, KC_D)) {
+        // Leader, d, d => Ctrl+A, Ctrl+C
+        SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
+    } else if (leader_sequence_three_keys(KC_D, KC_D, KC_S)) {
+        // Leader, d, d, s => Types the below string
+        SEND_STRING("https://start.duckduckgo.com\n");
+    } else if (leader_sequence_two_keys(KC_A, KC_S)) {
+        // Leader, a, s => GUI+S
+        tap_code16(LGUI(KC_S));
+    }
 }
