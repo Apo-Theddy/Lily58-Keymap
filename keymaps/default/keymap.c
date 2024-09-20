@@ -89,11 +89,11 @@ MO(_RAISE),KC_NO,  KC_UP,   KC_QUOT,   KC_NO,   KC_NO,                    KC_NO,
  *                   `----------------------------'           '------''--------------------'
  */
   [_ADJUST] = LAYOUT(
-  KC_NO,   KC_1, KC_2, KC_3, KC_NO, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, KC_4, KC_5, KC_6, MS_UP, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, KC_7, KC_8, KC_9, KC_0, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                             _______, _______, _______, _______, _______,  _______, _______, _______
+  KC_NO,   KC_1, KC_2, KC_3, KC_NO, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MS_ACL0,
+  XXXXXXX, KC_4, KC_5, KC_6, MS_UP, XXXXXXX,                        MS_WHLD, MS_UP, MS_WHLU, XXXXXXX, XXXXXXX, MS_ACL1,
+  XXXXXXX, KC_7, KC_8, KC_9, KC_0, XXXXXXX,                         MS_LEFT, MS_DOWN, MS_RGHT, XXXXXXX, XXXXXXX, MS_ACL2,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                  _______, _______, _______,XXXXXXX,          MS_BTN1,  MS_BTN2, _______, _______
   )
 };
 
