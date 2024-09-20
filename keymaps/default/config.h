@@ -51,8 +51,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_SLEEP
 */
 
-with cat
-/*
+with cat/*
 This is the c configuration file for the keymap
 
 Copyright 2012 Jun Wako <wakojun@gmail.com>
