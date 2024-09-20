@@ -1,0 +1,10 @@
+funciton -> function
+retrun -> return
+lenght -> length
+pulbic -> public
+privte -> private
+yeild -> yield
+defualt -> default
+comitt -> commit
+boolen -> boolean
+iterface -> interface
